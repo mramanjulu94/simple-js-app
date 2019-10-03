@@ -1,18 +1,5 @@
-alert('Hello world');
-
-var favoriteFood = 'Cheesesteak';
-document.write(favoriteFood);
-
-
-
-/* var myName = 'Bob';
-document.write(myName);
-
-var simpleAddition = 2 + 2;
-document.write(simpleAddition);
-
-
-var size = 100;
-var doubleSize = size * 2;
-var minSize = (doubleSize * 2) - (size / 2);
-document.write(minSize); */
+var repository = [
+  {name: "Bulbasaur",height: 7, type: ['grass', 'posion']},
+  {name: "Charmander", height: 11, type: ['fire']},
+  {name: "Squirtle", height: 9, type: ['water']}
+];
