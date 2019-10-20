@@ -4,6 +4,7 @@ var repository = [
   {name: 'Squirtle', height: 9, type: ['water']}
 ];
 
+Function loop{
 for(var i = 0; i < repository.length; i++)
 {
   if(repository[i].height > 10)
@@ -14,3 +15,8 @@ for(var i = 0; i < repository.length; i++)
   else
 document.write(repository[i].name + "  (height: " + repository[i].height + ")" + " type: " + repository[i].type + " " + "<br>" +  "<br>");
 }
+}
+
+
+repository.foreach(function(loop)
+);
