@@ -4,19 +4,18 @@ var repository = [
   {name: 'Squirtle', height: 9, type: ['water']}
 ];
 
-Function loop{
-for(var i = 0; i < repository.length; i++)
+repository.forEach(function(loop)
 {
-  if(repository[i].height > 10)
+  for(var i = 0; i < repository.length; i++)
   {
-    document.write(repository[i].name + "  (height: " + repository[i].height + ")" + " type: " + repository[i].type + "   -  Wow so tall! " +  "<br>" +  "<br>" );
+    if(repository[i].height > 10)
+    {
+      document.write(repository[i].name + "  (height: " + repository[i].height + ")" + " type: " + repository[i].type + "   -  Wow so tall! " +  "<br>" +  "<br>" );
 
+    }
+    else
+  document.write(repository[i].name + "  (height: " + repository[i].height + ")" + " type: " + repository[i].type + " " + "<br>" +  "<br>");
   }
-  else
-document.write(repository[i].name + "  (height: " + repository[i].height + ")" + " type: " + repository[i].type + " " + "<br>" +  "<br>");
-}
-}
 
-
-repository.foreach(function(loop)
+}
 );
