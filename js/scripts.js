@@ -1,21 +1,40 @@
+var pokemonRepository = (function () {
+
 var repository = [
   {name: 'Bulbasaur', height: 7, type: ['grass', 'posion']},
   {name: 'Charmander', height: 11, type: ['fire']},
   {name: 'Squirtle', height: 9, type: ['water']}
 ];
 
-repository.forEach(function(loop)
-{
-  for(var i = 0; i < repository.length; i++)
+function add(pokemon)
   {
-    if(repository[i].height > 10)
-    {
-      document.write(repository[i].name + "  (height: " + repository[i].height + ")" + " type: " + repository[i].type + "   -  Wow so tall! " +  "<br>" +  "<br>" );
-
-    }
-    else
-  document.write(repository[i].name + "  (height: " + repository[i].height + ")" + " type: " + repository[i].type + " " + "<br>" +  "<br>");
+    repository.push(pokemon);
   }
 
-}
-);
+  function getAll()
+  {
+    return repository;
+  }
+
+  return {
+    add: add,
+    getAll: getAll
+  };
+})();
+
+pokemonRepository.add({
+    name: "Pikachu",
+    height: 0.4,
+    types: "electr"
+});
+console.log(pokemonRepository.getAll());
+
+
+const array1 = pokemonRepository.getAll();
+
+array1.forEach(function(element) {
+    console.log(element);
+
+    });
+
+    
