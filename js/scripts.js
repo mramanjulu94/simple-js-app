@@ -25,7 +25,7 @@ function add(pokemon)
 pokemonRepository.add({
     name: "Pikachu",
     height: 0.4,
-    types: "electr"
+    types: "electric"
 });
 console.log(pokemonRepository.getAll());
 
@@ -33,8 +33,14 @@ console.log(pokemonRepository.getAll());
 const array1 = pokemonRepository.getAll();
 
 array1.forEach(function(element) {
-    console.log(element);
+console.log(element);
 
-    });
+if(element.height > 10)
+{
+document.write(element.name + "<br>" + "This pokemon is tall!" );
 
-    
+}
+else {
+document.write(element.name + "<br>");
+}
+});
