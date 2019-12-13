@@ -1,84 +1,93 @@
-
-var pokemonRepository = (function () {
-	var repository = [
-		{
-			name: 'Bulbasaur',
-			height: 2.4,
-			types: ['grass', 'poison']
-		},
-		{
-			name: 'Charmander',
-			height: 2.0,
-			types: ['fire']
-		},
-		{
-			name: 'Squirtle',
-			height: 5.7,
-			types: ['water']
-		},
-	];
-	function add (pokemon) {
-		repository.push (pokemon)
-	}
-
-	function getall() {
-		return repository;
-	}
-
-	function addListItem(pokemon) {
-		let $ul = document.querySelector('.pokemon-list');
-
-		const $li = document.createElement('li');
-		const $button = document.createElement('button');
-		$button.setAttribute('id', `${pokemon.name}`);
-		$button.innerText = `${pokemon.name}`;
-		$button.classList.add(`${pokemon.name}`);
+const pokemonRepository = (function () {
+    const $container = document.querySelector('.container');
+    const $pokemonList = document.querySelector('ul');
+    const repository = [];
+    const apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
 
-		$li.appendChild($button);
-		$ul.appendChild($li);
+    function add(pokemon) {
+        repository.push(pokemon);
+    }
 
 
-	}
 
-	function showDetails(pokemon) {
-		console.log(`${pokemon.name}`);
-	}
+    function getAll() {
+        return repository;
+    }
 
 
-	return {
-		add: add,
-		getall: getall,
-		addListItem: addListItem,
-		showDetails: showDetails
-	};
+    function search(searchName) {
+        repository.filter(function(pokemon) {
+            if (pokemon.name === searchName) {
+                return pokemon;
+            }
+        });
+    }
+
+
+    function addListItem(pokemon) {
+        const listItem = document.createElement('li');
+        const button = document.createElement('button');
+        button.innerText = pokemon.name;
+        button.classList.add('pokemon-name');
+        listItem.appendChild(button);
+        $pokemonList.appendChild(listItem);
+        button.addEventListener('click', function(event) {
+            showDetails(pokemon)
+        });
+    }
+
+
+    function showDetails(pokemon) {
+        pokemonRepository.loadDetails(pokemon).then(function () {
+            console.log(pokemon);
+        });
+    }
+
+
+    function loadList() {
+        return fetch(apiUrl).then(function (response) {
+            return response.json();
+        }).then(function (json) {
+            json.results.forEach(function (item) {
+                const pokemon = {
+                    name: item.name,
+                    detailsUrl: item.url
+                };
+                add(pokemon);
+            });
+        }).catch(function (e) {
+            console.error(e);
+        })
+    }
+
+    function loadDetails(item) {
+        const url = item.detailsUrl;
+        return fetch(url).then(function (response) {
+            return response.json();
+        }).then(function (details) { 
+            item.imageUrl = details.sprites.front_default;
+            item.height = details.height;
+            item.types = Object.keys(details.types);
+        }).catch(function (e) {
+            console.error(e);
+        });
+    }
+
+    return {
+        add: add,
+        getAll: getAll,
+        addListItem: addListItem,
+        search: search,
+        loadList: loadList,
+        loadDetails: loadDetails
+    };
 })();
 
 
+pokemonRepository.loadList().then(function() {
 
-document.write ('<h3> Pokemon Names</h3>');
-
-pokemonRepository.add ({
-	name: 'Pikachu',
-	height: 1.7,
-	types: ['electirc']
-});
-
-
-pokemonRepository.getall().forEach(function(pokemon) {
-	document.write(pokemon.name + '<br>' + 'Height: ' + pokemon.height + '<br>' + 'Type: ' + pokemon.types + '<br>' + '<br>');
-
-	pokemonRepository.addListItem(pokemon);
-	var $button = document.querySelector(`.${pokemon.name}`);
-
-
-	$button.addEventListener('click', function(event) {
-		pokemonRepository.showDetails((pokemon));
-	});
-
-});
-
-var $button = document.querySelector('button');
-$button.addEventListener('click', function (event) {
-	console.log(event);
+    pokemonRepository.getAll().forEach(function(pokemon) {
+        pokemonRepository.addListItem(pokemon);
+    });
 });
