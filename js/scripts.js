@@ -87,11 +87,12 @@ console.error(e);
 
 // Function to show modal for Pokemon data
 function showModal(item) {
-// Clear all existing modal content
+
 $modalContainer.innerHTML = '';
 
 const modal = document.createElement('div');
 modal.classList.add('modal');
+
 
 const nameElement = document.createElement('h3');
 nameElement.innerText = item.name.charAt(0).toUpperCase() + item.name.slice(1);
@@ -139,8 +140,7 @@ hideModal();
 
 // Click outside of the modal to close the modal
 $modalContainer.addEventListener('click', (e) => {
-// Since this is also triggered when clicking INSIDE the modal
-// we only want the modal to close if the user clicks directly on the overlay
+
 var target = e.target;
 if (target === $modalContainer) {
 hideModal();
@@ -163,7 +163,6 @@ hideModal: hideModal
 
 // forEach Used To cycle through addListItem function properties
 pokemonRepository.loadList().then(function() {
-// Now the data is loaded
 pokemonRepository.getAll().forEach(function(pokeList) {
 pokemonRepository.addListItem(pokeList);
 });
