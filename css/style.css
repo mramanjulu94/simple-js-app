@@ -1,10 +1,7 @@
 html,
 
 	body {
-		position: relative;
-		font-size: 20px;
-		min-height: 100%;
-		padding-bottom: 10rem;
+font-family: Arial, sans-serif;
 	}
 
 	#modal-container {
@@ -19,6 +16,7 @@ html,
 	  left: 0;
 	  width: 100%;
 	  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
 
 	  /* to show it above other content */
 	  z-index: 999;
@@ -35,7 +33,7 @@ html,
 	  margin: auto;
 	  display: inline-block;
 	  box-sizing: border-box;
-
+   background: #fff;
 	  padding: 15px;
 	  width: 100%;
 	  max-width: 700px;
@@ -44,10 +42,8 @@ html,
 
 	.modal-close {
 	  float: right;
-
 	  border: 0;
 	  background: none;
-
 	  text-decoration: underline;
 	}
 
